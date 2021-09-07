@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Exclude default binaries
+*.DS_Store
+
+# Exclude IDE
+.idea
