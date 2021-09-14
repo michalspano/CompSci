@@ -78,7 +78,7 @@ def create_card(name: str, index: int, d):
 
             # Create an inner function to return random location from specified range
             def randomised_location(dim_par: int) -> int:
-                return r.randint(fix_d, dim_par - fix_d)
+                return r.randint(fix_d * 2, dim_par - fix_d * 2)
 
             # Avoid collision detection if no objects were drawn
             if len(coords) == 0:
@@ -87,10 +87,10 @@ def create_card(name: str, index: int, d):
             # Check for collision
             else:
                 start: bool = True
-                while start:
-                    # Load current coords from the drawn objects
-                    c_x, c_y = coords[::2], coords[1::2]
 
+                # Load current coords from the drawn objects
+                c_x, c_y = coords[::2], coords[1::2]
+                while start:
                     # Generate random coords
                     r_x, r_y = randomised_location(m_width), randomised_location(m_height)
 
@@ -98,8 +98,12 @@ def create_card(name: str, index: int, d):
                     for j in range(len(c_x)):
 
                         # Detect non-conflicting coords
-                        if (c_x[j] - fix_d) < r_x or r_x > (c_x[j] + fix_d) or \
-                                (c_y[j] - fix_d < r_y or r_y > c_y[j] + fix_d):
+                        """
+                        'fix_d' represents the fixed radius of each oval;
+                        we need to take the radius multiplied by 2 in the condition to prevent any possible overlapping.
+                        """
+                        if ((c_x[j] - fix_d * 2 >= r_x) or (r_x >= c_x[j] + fix_d * 2)) and \
+                                ((c_y[j] - fix_d * 2 >= r_y) or (r_y >= c_y[j] + fix_d * 2)):
 
                             # Break out of the loop and append valid coords
                             start = False
