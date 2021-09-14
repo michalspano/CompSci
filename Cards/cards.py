@@ -17,6 +17,9 @@ from PIL import Image, ImageDraw
 
 # Define colors
 c: final = ['red', 'green', 'blue']
+            
+# Open logs src
+logs = open('logs/check.log', 'w')
 
 
 # Define main function
@@ -80,6 +83,11 @@ def create_card(name: str, index: int, d):
             def randomised_location(dim_par: int) -> int:
                 return r.randint(fix_d * 2, dim_par - fix_d * 2)
 
+            """
+            NOTE: Only partial collision implemented;
+            Single collision will be detected.
+            """
+
             # Avoid collision detection if no objects were drawn
             if len(coords) == 0:
                 coords.append(randomised_location(m_width)), coords.append(m_height)
@@ -105,6 +113,10 @@ def create_card(name: str, index: int, d):
                         if ((c_x[j] - fix_d * 2 >= r_x) or (r_x >= c_x[j] + fix_d * 2)) and \
                                 ((c_y[j] - fix_d * 2 >= r_y) or (r_y >= c_y[j] + fix_d * 2)):
 
+                            # *** LOGS (OPTIONAL ***
+                            logs.write(f"{c_x[j]=}: {r_x=}; {abs(c_x[j] - r_x)}")
+                            logs.write(f"{c_y[j]=}: {r_y=}; {abs(c_y[j] - r_y)}\n")
+
                             # Break out of the loop and append valid coords
                             start = False
                             coords.append(r_x), coords.append(r_y)  # -> Valid coords
@@ -113,7 +125,8 @@ def create_card(name: str, index: int, d):
             r_color = r.choice(c)
 
             # Draw an object
-            draw.ellipse((coords[-2] - fix_d, coords[-1] - fix_d, coords[-2] + fix_d, coords[-1] + fix_d), fill=r_color)
+            shape = [(coords[-2] - fix_d, coords[-1] - fix_d), (coords[-2] + fix_d, coords[-1] + fix_d)]
+            draw.ellipse(shape, fill=r_color)
 
     # Call the nested function
     create_graphics()
@@ -126,8 +139,11 @@ def create_card(name: str, index: int, d):
 
     # Save the img at specified path (locally)
     local_image.save(f'{filename}{index}.jpg')
-    
+
 
 # Invoke the main function
 if __name__ == '__main__':
     main()
+
+    # Close logs file
+    logs.close()
