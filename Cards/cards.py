@@ -61,7 +61,7 @@ def load_database(PATH) -> list:
 # Create a function to create individual cards
 def create_card(name: str, index: int, d):
 
-    # Receive img dims
+    # Receive default dimensions of the img
     m_width, m_height = d[0], d[1]
 
     # Create a local img using PIL
@@ -73,11 +73,17 @@ def create_card(name: str, index: int, d):
     # Create a function to draw individual graphics (fixed dimension by default of 10)
     def create_graphics(fix_d: int = 10, max_g: int = 5):
 
+        # Define counter of current valid objects (displayed on the canvas)
+        obj_counter: int = 0
+
         # Create an empty list to store coords of a single card (i.e., its elements)
         coords: list = []
 
         # Create graphics in a randomised loop (max 5)
         for _ in range(r.randint(1, max_g)):
+
+            # Define current object counter, i.e. how many valid coords passed in a single iteration
+            current_obj_counter: int = 0
 
             # Create an inner function to return random location from specified range
             def randomised_location(dim_par: int) -> int:
@@ -90,7 +96,10 @@ def create_card(name: str, index: int, d):
 
             # Avoid collision detection if no objects were drawn
             if len(coords) == 0:
-                coords.append(randomised_location(m_width)), coords.append(m_height)
+                coords.append(randomised_location(m_width)), coords.append(randomised_location(m_height))
+
+                # Increment the global object counter
+                obj_counter += 1
 
             # Check for collision
             else:
@@ -99,7 +108,7 @@ def create_card(name: str, index: int, d):
                 # Load current coords from the drawn objects
                 c_x, c_y = coords[::2], coords[1::2]
                 while start:
-                    # Generate random coords
+                    # Generate random coords for current iteration
                     r_x, r_y = randomised_location(m_width), randomised_location(m_height)
 
                     # Iterate over the loop of drawn objects
@@ -113,18 +122,27 @@ def create_card(name: str, index: int, d):
                         if ((c_x[j] - fix_d * 2 >= r_x) or (r_x >= c_x[j] + fix_d * 2)) and \
                                 ((c_y[j] - fix_d * 2 >= r_y) or (r_y >= c_y[j] + fix_d * 2)):
 
+                            # Increment current object counter (valid coords counter)
+                            current_obj_counter += 1
+
                             # *** LOGS (OPTIONAL ***
                             logs.write(f"{c_x[j]=}: {r_x=}; {abs(c_x[j] - r_x)}")
                             logs.write(f"{c_y[j]=}: {r_y=}; {abs(c_y[j] - r_y)}\n")
 
-                            # Break out of the loop and append valid coords
-                            start = False
-                            coords.append(r_x), coords.append(r_y)  # -> Valid coords
+                    # Detect matching number of valid coords (i.e., non-conflicting coords were detected)
+                    if current_obj_counter >= obj_counter:
+                        coords.append(r_x), coords.append(r_y)  # -> Populate the list with valid coords
+
+                        # Increment global object counter
+                        obj_counter += 1
+
+                        # Break out of the loop
+                        start = False
 
             # Access a random color from the predefined list of available colors
             r_color = r.choice(c)
 
-            # Draw an object
+            # Draw an object using a defined ellipse shape
             shape = [(coords[-2] - fix_d, coords[-1] - fix_d), (coords[-2] + fix_d, coords[-1] + fix_d)]
             draw.ellipse(shape, fill=r_color)
 
