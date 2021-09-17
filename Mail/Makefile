@@ -5,8 +5,8 @@ define COMPILE
 	lua mail.lua
 	python3 mail.py 
 	python3 mail2.py
-	make mail
-	./mail src/data_set.csv dist/c-out.log
+	make C/mail
+	./C/mail src/data_set.csv dist/c-out.log
 endef
 
 # Open dist

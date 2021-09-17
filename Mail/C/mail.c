@@ -3,13 +3,9 @@
 #include <string.h>
 #include <ctype.h>
 
-// Define macros
-#define DOMAIN "gmail.com"
-#define ERROR "Usage: ./mail $INPUT_PATH $OUTPUT_PATH\n"
+// Include local header with macros and functionality
+#include "mail.h"
 
-// Declare function prototypes
-int fileError(char * PATH);
-void writeDomain(FILE *ip);
 
 // Using command-line arguments to parse input
 int main(int argc, char *argv[])
@@ -88,19 +84,4 @@ int main(int argc, char *argv[])
 
     // Return 0 after successful completion
     return 0;
-}
-
-// Create a function to output an error at a given path
-int fileError(char * PATH)
-{
-    fprintf(stderr, "%s not available.\n", PATH);
-    return 1;
-}
-
-// Create a function to assign each domain
-void writeDomain(FILE *ip)
-{
-    // Write to a text
-    fputc('@', ip);
-    fputs(DOMAIN, ip);
 }
