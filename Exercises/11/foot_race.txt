@@ -1,0 +1,5 @@
+Jozef 200
+Adam 182
+Peter 211
+Fares 230
+Julia 210
