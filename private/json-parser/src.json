@@ -1,6 +1,10 @@
 {
     "coordinates": {
-        "latitude": 1231312.21, 
-        "longitude": 1231231.0
-    }
+        "latitude": 100101.10101, 
+        "longitude": 101.10111111
+    }, 
+    "directions": [
+        "S", 
+        "W"
+    ]
 }
