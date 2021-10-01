@@ -35,7 +35,7 @@ def main(path: str):
     
     # Write history to logs
     with open('logs/info.log', 'a') as log:
-        log.write(f'{formatted_data[0]};{formatted_data[1]}')
+        log.write(f'{formatted_data[0]};{formatted_data[1]}\n')
 
     # Search the web
     wb.open(url, new=1)
