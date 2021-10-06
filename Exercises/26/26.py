@@ -2,8 +2,8 @@
 
 """
 Michal Špano
-25. Lottery
-29/09/2021
+26. Landscape
+05/10/2021
 """
 
 # Import libs
