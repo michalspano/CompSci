@@ -32,11 +32,22 @@ def main(img_path: str = 'src/input.png', out: str = 'out.log'):
     x_shift: int = img_width // (N1 * 2)  # {Half of one object in a row}
     y_shift: int = (img_height // N2 + 1) // N2  # {Half of one object in a column}
 
-    # Format command-line output
-    def format_out(ID: tuple, white: bool) -> None:
-        state = 'White' if white else 'Black'
-        log: str = f'Row: {ID[0]}; Column: {ID[1]} = {state!r}'
-        out_file.write(log + '\n'), print(log)
+    """
+    Source: https://stackoverflow.com/questions/45782766/color-python-output-given-rrggbb-hex-value/45782972#45782972
+    """
+
+    RESET = '\033[0m'  # {Octal backspace default reset}
+
+    # Parse octal backspace from RGB color
+    def term_color_escape(r: int, g: int, b: int, background=False):
+        return '\033[{};2;{};{};{}m'.format(48 if background else 38, r, g, b)
+
+    # Format colored (visual) command line output
+    def format_term_color(f: tuple, color: tuple) -> None:
+        print(term_color_escape(f[0], f[1], f[2])  # {Text fill color}
+              + term_color_escape(color[0], color[1], color[2], background=True)  # {BG color}
+              + 'Sample Text'
+              + RESET)
 
     i: int = 1
     # Iterate over possible colors
@@ -44,7 +55,13 @@ def main(img_path: str = 'src/input.png', out: str = 'out.log'):
         j: int = 1
         for y in range(y_shift, img_height, y_shift * 2):
             c = img_sprite.get(x, y)  # {Receive current color}
-            format_out(ID=(i, j), white=is_white(c))  # {Format current color}
+            text_fill_white: bool = is_white(c)
+
+            # Text fill color (type tuple)
+            text_f: tuple = (255, ) * 3 if text_fill_white else (0, ) * 3
+
+            # Print out colored output onto terminal
+            format_term_color(text_f, c)
             j += 1
         i += 1
 
