@@ -6,19 +6,32 @@ Michal Špano
 12/10/2021
 """
 
+import os
+
 # Default canvas definition
 import tkinter as tk
+
+# Use command-line arguments
+from sys import argv
+
+# Import generation method
+from utils.generate import GENERATE
 canvas = tk.Canvas()
 canvas.pack()
 
 
 # Define main function
 def main(input_path: str):
-
     """
     TODO: Fix for uniform platform
     Now: 1:1 ratio only.
     """
+
+    # Generate new env (check for a valid digit)
+    # If no command-line argument is passed, current local input will be parsed
+    if len(argv) == 2:
+        GENERATE(int(argv[1])) if argv[1].isdigit() and int(argv[1]) > 1 \
+            else exit(f'./{os.path.relpath(__file__)} $NUMERIC EXPRESSION (greater than 1).')
 
     # Do not allocate data to memory
     with open(input_path) as f:
@@ -39,7 +52,7 @@ def main(input_path: str):
         i: int = 0  # {Row index}
         for row in f.readlines():
             j: int = 0  # {Column index}
-            colors: list = [row[i:i+2] for i in range(0, len(row.strip()), 2)][::-1]
+            colors: list = [row[i:i + 2] for i in range(0, len(row.strip()), 2)][::-1]
             for c in colors:
                 # Transform to valid hex codec
                 new_color: str = f'#{c * 3}'
