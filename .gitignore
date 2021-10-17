@@ -138,3 +138,7 @@ dmypy.json
 
 # Exclude test dir(s)
 test/
+
+# Haskell objects
+*.o
+*.hi
