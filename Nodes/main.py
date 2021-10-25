@@ -9,40 +9,54 @@ Nodes in Python
 
 # Import libs
 import graphviz as gv
+from sys import argv
+
+# Global structure of nodes
+struct: dict = {}
+
+# Error backslash
+ERROR = '\033[91m'
 
 
-# TODO: Create 'Node' class
+# Node class
 class Node:
-    def __init__(self):
-        pass
+    def __init__(self, currentNode=None):
+        self.currentNode = currentNode
+
+    # Assign current node to memory
+    def __assign__(self) -> dict:
+        return {'node': (self.currentNode[1].split()),
+                'dist': [int(d) for d in self.currentNode[2].split()],
+                'time': [int(t) for t in self.currentNode[3].split()]}
+
+    # Static method to display node graph
+    @staticmethod
+    def __graph__(out: str) -> None:
+        # Create a graphviz object
+        dot = gv.Digraph(format='png')
+        for node in struct:
+            current_edge: list = [f"{node}{n}" for n in struct[node]['node'] if len(struct[node]['node']) > 0]
+            dot.edges(current_edge)
+
+        print(f'Schema:\n{dot.source}')  # {Optional}
+        dot.render(out, view=True)  # {Render node map as png}
 
 
 def main(out_path: str = 'out/node'):
-    # TODO: Provide input from .txt document
-    # Compute nodes in a dict
-    struct: dict = {"A": {'node': ['B', 'C'], 'dist': [10, 12], 'time': [4, 5]},
-                    "B": {'node': ['C', 'E'], 'dist': [4, 8], 'time': [4, 10]},
-                    "C": {'node': ['D', 'E'], 'dist': [10, 2], 'time': [20, 5]},
-                    "D": {'node': ['E'], 'dist': [10], 'time': [5]},
-                    "E": {'node': [], 'dist': [], 'time': []}  # {End node}
-                    }
+    # Compute nodes in a dict with an error assertion
+    assert load_data(), f'{ERROR}Input file or Input file data type error!'
+    Node().__graph__(out_path)
 
-    # Create a graphviz object
-    dot = gv.Digraph(format='png')
-    for node in struct:
-        current_edge: list = [f"{node}{n}" for n in struct[node]['node'] if len(struct[node]['node']) > 0]
-        dot.edges(current_edge)
-    
-    # print(f'Schema:\n{dot.source}')  # {Optional}
-    dot.render(out_path, view=True)  # {Render node map as png}
+    # TODO: A -> E, by a) distance, b) time
 
-    # TODO: Fix search algorithm
-    """A -> E, by a) distance, b) time
-    a) distance [x]
-    """
+    # Assert proper amount of command line arguments
+    assert len(argv) == 2, f"{ERROR}`Usage: {argv[0]} d/t [distance or time computed]`."
+
+    # Parse desired option
+    option: str = 'dist' if argv[1].lower() in ['distance', 'dist', 'd'] else 'time'
 
     # List to store individual weights
-    temp = []
+    temp: list = []
     for node in struct:
 
         # Detect the current point and access its properties
@@ -64,10 +78,10 @@ def main(out_path: str = 'out/node'):
                 node_point: str = current_node['node'][i]
 
                 # Sort assigned distances
-                sort_dist: list = sorted(current_node['dist'])
+                sort_dist: list = sorted(current_node[option])
 
                 # Assign weight of node's property with corresponding indexes
-                dist_weight: int = sort_dist.index(current_node['dist'][i])
+                dist_weight: int = sort_dist.index(current_node[option][i])
 
                 # Populate weights' list
                 weights.append([f"{node}{node_point}", i, dist_weight])
@@ -79,8 +93,7 @@ def main(out_path: str = 'out/node'):
             # Default data assertion
             temp.append([[f"{node}{current_node['node'][0]}", 0, 0]])
 
-    i: int = 0
-
+    j: int = 0
     # Store continuous chain of node-to-node moves
     path: list = []
 
@@ -92,7 +105,7 @@ def main(out_path: str = 'out/node'):
 
         # Decision making: weights
         moves: list = []
-        for move in temp[i]:
+        for move in temp[j]:
             moves.append(sum(move[1:]))
 
         # Decide which weight is the lowest
@@ -105,7 +118,7 @@ def main(out_path: str = 'out/node'):
         exact_list: bool = all(el == moves[0] for el in moves)
 
         # Assign the most convenient pointer from node-to-node
-        pointer = temp[i][min_weight_index] if not exact_list else temp[i][-1]
+        pointer = temp[j][min_weight_index] if not exact_list else temp[j][-1]
 
         # Update current HEAD
         HEAD = pointer[0][1]
@@ -114,15 +127,14 @@ def main(out_path: str = 'out/node'):
         path.append(pointer)
 
         # Increment counter
-        i += 1
+        j += 1
 
-    # Compute total distance
-    # TODO: Make universal for distance and time
-
+    # Format each node pointer to the console
     def format_move(idx: int, start: str, end: str) -> None:
         print(f"{idx}: {start} -> {end}")
 
-    total_dist: int = 0
+    # Compute total distance/time
+    total_sum: int = 0
     move_count: int = 1
     for move in temp:
         for node in move:
@@ -139,22 +151,43 @@ def main(out_path: str = 'out/node'):
                     current_point: str = node[0][0]
 
                     # Assign current point and its properties stored in a dict
-                    current_node: dict = struct[current_point]
+                    current_node_dict: dict = struct[current_point]
 
                     # Assign node to which the current node is pointing to
                     node_head: str = node[0][1]
 
                     # Receive index of pointing node
-                    node_head_index: int = current_node['node'].index(node_head)
+                    node_head_index: int = current_node_dict['node'].index(node_head)
 
                     # Increment counter
-                    total_dist += current_node['dist'][node_head_index]
-
+                    total_sum += current_node_dict[option][node_head_index]
                     format_move(move_count, current_point, node_head)
                     move_count += 1
 
-    print(f'Total distance travelled: {total_dist!r}')
+    # Show final output value
+    print(f"Total {option} travelled: {total_sum!r}")
 
 
+# Function to load each node to a struct
+def load_data(input_src: str = 'src/input.txt') -> bool:
+    global struct  # {Global reference}
+
+    # Read text file
+    try:
+        with open(input_src) as f:
+            for row in f:
+                current_instance: list = row.strip().split(';')  # {Format current node}
+                # Parse to Node class and assign to struct
+                struct[current_instance[0]] = Node(current_instance).__assign__()
+
+        # Indicate successful completion
+        return True
+
+    # Handle possible errors and return False
+    except FileNotFoundError or TypeError:
+        return False
+
+
+# Invoke main function
 if __name__ == '__main__':
     main()
