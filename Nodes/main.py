@@ -84,7 +84,9 @@ def main(out_path: str = 'out/node'):
                 dist_weight: int = sort_dist.index(current_node[option][i])
 
                 # Populate weights' list
-                weights.append([f"{node}{node_point}", i, dist_weight])
+                weights.append([f"{node}{node_point}",
+                                len(current_node['node']) - (i + 1),
+                                dist_weight])
             temp.append(weights)
 
         # If a point is pointing to a single node
