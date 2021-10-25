@@ -31,7 +31,7 @@ def animate_object(e_dim: tuple = (20, 25)):
     # Display desired char once 2/3 are passed
     if y_pos > (c_dim // 3) * 2:
         canvas.create_text(x_pos + e_dim[0] // 2, y_pos + e_dim[1] // 2,
-                           text=current_key, tags='egg')
+                           text=current_key, tags='egg', fill='black')
 
     # Call upon function if y position is valid and char not guessed
     if y_pos < c_dim - e_dim[1] and not state:
