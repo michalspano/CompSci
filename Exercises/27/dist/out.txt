@@ -1,3 +1,3 @@
-ehT list of dcmonma nlei arguments passed to a Python tcpir.s
-To loop over the narasddt ,utipn ro the list of files given on the command line, see the flie pitun mduel.o
-tcirsp is the eht neam iusgn is or mypet tish eht oionpt to was a hehrtwe eth to not). line interpreter, If ets the eth aws (ti gt.nsri rien,trrepet command the mpahntea dependent -c script full maonmdc to argv[0] avg[0]r rgtins detuecex passed tnhoPy no tsemsy is is 0[gar]v '-c'. si irantpeog If name
+arguments Python s.tcirp list a of enli to amconmd passed The
+is argv[0] eth command ot si pssade set tgrnpiaoe thsi or interpreter, no cpsitr If eth system '-c'. irngst. ioptno eamn g]0rva[ was is (ti gsitrn the using line aemn a ]v0rag[ empty executed fI to ndeendtpe interpreter, lful cdoammn was to ewrhthe si napatmhe the is the Python not). het script -c eth
+loop input oT given ese eth files module. elni, command fo input, file or over the no tlsi the standard the
