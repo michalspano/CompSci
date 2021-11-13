@@ -1,0 +1,9 @@
+50
+20 0 Oxford Circus Stn
+35 0 Piccadilly Circus
+10 20 Charles II Street
+40 20 Trafalgar Sq
+10 40 Whitehall
+5 10 Horse Guards Parade
+35 10 Westminster Stn
+0 55 Thomas' Hospital
