@@ -75,7 +75,7 @@ def is_valid_hex_color(color: str) -> bool:
     if color[0] != '#':  # {valid format}
         return False
     for i in range(1, 7):  # {check valid hex digits; 1-9, a-f}
-        if not color[i].isdigit() and not 'a' <= color[i] <= 'f':
+        if not color[i].isdigit() and not 'a' <= color[i].lower() <= 'f':
             print('a')
             return False
     return True
