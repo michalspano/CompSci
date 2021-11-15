@@ -44,10 +44,11 @@ def load_data(path: str) -> (int, dict):
 
 
 # Global loaded data
-print(f'\u001b[31mPress any key to start.')
+print(f'\u001b[31mPress any key to start.\033[0m')
 instance: tuple = load_data('bus_util_extent.txt')
 max_capacity: int = instance[0]
 loaded_data: dict = instance[1]
+station_count: int = len(loaded_data)
 
 
 # Create a function to display data onto canvas
@@ -83,8 +84,10 @@ def display_data(_max: int, data: dict, idx: int) -> None:
 # Create a global object counter
 def obj_counter() -> None:
     global obj_count
-    obj_count += 1
-    display_data(max_capacity, loaded_data, obj_count)
+    if obj_count < station_count:
+        obj_count += 1
+        print(f'Displaying {obj_count}/{station_count} stations.')
+        display_data(max_capacity, loaded_data, obj_count)
 
 
 # Bind to any key press
