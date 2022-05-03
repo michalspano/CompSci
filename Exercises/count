@@ -1,0 +1,2 @@
+#/usr/bin/sh
+./count_files.py;cat sorted.txt;printf "\n";
