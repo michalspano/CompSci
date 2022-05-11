@@ -136,9 +136,6 @@ dmypy.json
 # Exclude imgs
 *.jpg
 
-# Exclude test dir(s)
-test/
-
 # Haskell objects
 *.o
 *.hi
