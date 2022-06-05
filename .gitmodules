@@ -1,0 +1,3 @@
+[submodule ".py"]
+	path = src/general-py
+	url = https://github.com/michalspano/.py.git

@@ -1,0 +1,5 @@
+Hello!
+My name is Michal.
+I like INF.
+This is 9th exercise.
+:)

@@ -1,0 +1,14 @@
+Doveridge;95;0
+Roston;15;5.4
+Ellastone;-5;2.4
+Stanton;132;3.6
+Waterhouses;-5;5.8
+Lynx Cave;-40;5.2
+Castle Folly;30;6.1
+Hulme End;10;1.6
+Hartington;14;3.2
+Biggin;55;2.4
+Minninglow Hill;11;6
+Longcliffe;-3;3
+Manystones Lane;-16;4.5
+Carsington Water;-75;2.1
