@@ -1,3 +1,0 @@
-English;EN
-Slovak;SK
-German;GE

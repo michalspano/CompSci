@@ -1,3 +1,6 @@
-[submodule "general-py"]
-	path = src/general-py
+[submodule ".py"]
+  path = "src/.py"
+  url = "https://github.com/michalspano/.py.git"
+[submodule "src/.py"]
+	path = src/.py
 	url = https://github.com/michalspano/.py.git

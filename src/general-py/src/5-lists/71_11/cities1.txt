@@ -1,8 +1,0 @@
-Amsterdam;Netherlands
-Andorra;Andorra
-Athens;Greece
-Belgrade;Serbia
-Berlin;Germany
-Bern;Switzerland
-Bratislava;SLovakia
-Brussels;Belgium

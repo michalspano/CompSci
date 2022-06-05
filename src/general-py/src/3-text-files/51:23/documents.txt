@@ -1,4 +1,0 @@
-documents.txt
-text1.txt
-encryption.txt
-sample.txt

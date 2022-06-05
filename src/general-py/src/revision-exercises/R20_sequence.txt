@@ -1,3 +1,0 @@
-pencolor purple, penwidth 2, line 20, right 45
-repeat 10;2, left 12, line 4
-line 10

@@ -1,5 +1,0 @@
-textfile=open("score.txt", "w")
-name=input("What is your name?")
-textfile.write("Hello \n")
-textfile.write("I am " + str(name) +". \n")
-textfile.close()
