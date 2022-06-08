@@ -6,10 +6,11 @@ The __custom tagging__ is currently _deprecated_ and was previously used to indi
 
 ___
 ~ Open for __pull requests__! 😄
-### [`src`][1] - source codes with specific projects
+
+### [src][1] - source codes with specific projects
 ___
 
-### [`help`][2] - a collection of repositeries that teach you how to code in different languages
+### [help][2] - a collection of repositeries that teach you how to code in different languages
 ___
 
 __Here's a list of repositeries that I curate__:
@@ -21,6 +22,7 @@ __Here's a list of repositeries that I curate__:
 - [JavaScript / TypeScript - `js`, `ts`](https://github.com/michalspano/console-based-js)
 - [PHP + web development - `php`](https://github.com/michalspano/robme-web)
 - [Shell - `sh`](https://github.com/michalspano/shell-is-fun)
+
 ___
 
 ### [Private][3] --- source code of all kinds :+1:
