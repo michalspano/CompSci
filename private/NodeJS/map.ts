@@ -1,7 +1,7 @@
 #!/usr/bin/env ts-node
 
 // ensure proper usage
-if (process.argv.length != 3) { console.log("Usage: map.ts <input>"); process.exit(1) }
+if (process.argv.length != 3) { console.error("Usage: map.ts <input>"); process.exit(1) }
 
 var range: number = Number(process.argv[2]);
 
