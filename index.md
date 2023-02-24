@@ -2,7 +2,7 @@
 ___
 
 ### Preview the contents
-One can preview and/or interact with the contents of the repo here: [link](https://github.com/michalspano/Computer-Science) (using __GitHub's Dev__ web-based editor).
+One can preview and/or interact with the contents of the repo here: [link](https://github.dev/michalspano/Computer-Science) (using __GitHub's Dev__ web-based editor).
 
 ### Custom tagging
 The __custom tagging__ is currently _deprecated_ and was previously used to indicate progress taken in the repositery.
