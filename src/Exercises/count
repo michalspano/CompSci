@@ -1,2 +1,0 @@
-#/usr/bin/sh
-./count_files.py $1;

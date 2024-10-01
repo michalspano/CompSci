@@ -2,7 +2,7 @@
 
 # Import modules
 from os import listdir
-from random import randint, choice
+from random import choice
 from sys import argv
 
 
@@ -20,7 +20,7 @@ def main():
     if operand == '--read' or operand == '-r':
         read_dir(), exit()
         
-    elif operand == '--show' or operand == '-s':
+    elif operand == '--pick' or operand == '-p':
         print(f'Randomly chosen exercise: {show_random_int()}'), exit()
 
     print('Unknown operand.')
