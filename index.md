@@ -35,10 +35,9 @@ ___
 Here you find lots of source code written in several languages, just like `Lua`, `Rust`, `C#`, `C`, `Python`, etc.
 It would be too hard to cathegorise all the files, so I prefer to store them in a specific directory.
 
-### [Exercises][4] --- Collection of completed exercises about Computer Science
-___
+### [High School Exercises][4] -- Collection of Introductory Python exercises
 
-Sourced book - [Slovak](http://creatingwithpython.com/eknihy.html#mvp); [English](http://creatingwithpython.com/eknihy.html#spwp). For any __objections__, reach out to me via [email](mailto:michal.spano03@gmail.com).
+See [src/high-school-exam-exercises#readme][high-school-exam] for more details.
 
 - Primary language of instruction: `Python3`
 
@@ -47,3 +46,4 @@ Sourced book - [Slovak](http://creatingwithpython.com/eknihy.html#mvp); [English
 [2]: https://github.com/michalspano/Computer-Science/tree/main/help
 [3]: https://github.com/michalspano/Computer-Science/tree/main/private
 [4]: https://github.com/michalspano/Computer-Science/tree/main/src/Exercises
+[high-school-exam]: https://github.com/michalspano/Computer-Science/tree/main/src/high-school-exam-exercises#readme
