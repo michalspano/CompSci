@@ -22,7 +22,7 @@ https://github.com/Miserlou/Zappa/issues/854#issuecomment-313694177
 def main(d_name, d_ext):
 
     # Locate and open the workbook
-    workbook = xlrd.open_workbook("src/data_set.xls")
+    workbook = xlrd.open_workbook("in/data_set.xls")
 
     # Open the sheet of index 0
     sheet = workbook.sheet_by_index(0)

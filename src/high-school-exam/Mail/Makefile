@@ -2,11 +2,11 @@
 
 # Compile all selected programs
 define COMPILE
-	lua mail.lua
-	python3 mail.py 
-	python3 mail2.py
-	make C/mail
-	./C/mail src/data_set.csv dist/c-out.log
+	lua src/mail.lua
+	python3 src/mail.py 
+	python3 src/mail2.py
+	make ./src/mail
+	./src/mail in/data_set.csv dist/c-out.log
 endef
 
 # Open dist

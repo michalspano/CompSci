@@ -5,7 +5,7 @@
 ]]
 
 -- Declare an input database
-inputFile = io.open("src/data_set.csv", "r")
+inputFile = io.open("in/data_set.csv", "r")
 
 -- Declare an output file
 outputFile = io.open("dist/output.txt", "w")
